@@ -1,0 +1,26 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12">
+            <lightning-combobox
+            name="rankedlst"
+            label="Select Chess Title"
+            value={value}
+            placeholder={value}
+            options={options}
+            onchange={handlePicklst} ></lightning-combobox>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout>
+        <lightning-button variant="success" label="Search Players" title="Search Titled List" onclick={handleClickRankedLst}></lightning-button>
+    </lightning-layout>
+    <lightning-layout>
+        <lightning-layout-item size="12">
+            <div>Players</div>
+            <div>
+                <template for:each={arrayPlayers} for:item="string">
+                    <p key={string.id}><lightning-badge label={string} class="slds-badge_inverse"></lightning-badge></p>
+                </template>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

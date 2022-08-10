@@ -1,0 +1,22 @@
+<template>
+    <lightning-layout>
+        <lightning-input id="chss1" type="text" label="Chess Player Name: ♚♛♜♝♞♟" onchange={getChessPlayer}></lightning-input>
+    </lightning-layout>
+    <lightning-layout>
+            <lightning-button variant="success" label="Search" title="Search Player" onclick={handleClick}></lightning-button>
+    </lightning-layout>
+    <lightning-layout>
+        <lightning-card>
+            <h1 slot="title">
+                <lightning-avatar src={getAvatar} style="zoom: 4" ></lightning-avatar>
+            </h1>
+            <p><lightning-input type="text" label="Name" value={getName} >{getName}</lightning-input></p>
+            <p><lightning-input type="text" label="Username" value={getUsername} >{getUsername}</lightning-input></p>
+            <p><lightning-input type="text" label="Title" value={getTitle}>{getTitle}</lightning-input></p>
+            <p><lightning-input type="text" label="Location" value={getLocation}>{getLocation}</lightning-input></p>
+            <p><lightning-input type="text" label="Followers" value={getFollowers} >{getFollowers}</lightning-input></p>
+            <p><lightning-input type="text" label="Chess.com Url" value={getUrl}>{getUrl}</lightning-input></p>
+            <p><lightning-input type="text" label="Twitch Url" value={getTwitchUrl}>{getTwitchUrl}</lightning-input></p>
+        </lightning-card>
+    </lightning-layout>
+</template>
