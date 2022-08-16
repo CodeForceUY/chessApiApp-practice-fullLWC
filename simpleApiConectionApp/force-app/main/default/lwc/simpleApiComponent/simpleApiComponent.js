@@ -1,4 +1,5 @@
 import { LightningElement , track } from 'lwc';
+import savePlayerApex from "@salesforce/apex/chessController.savePlayerApex";
 
 export default class SimpleApiComponent extends LightningElement {
 
@@ -16,6 +17,7 @@ export default class SimpleApiComponent extends LightningElement {
         this.chessName = event.target.value;
     }
     
+
     handleClick(){
         this.avatar = "";
         this.url = "";
@@ -25,6 +27,7 @@ export default class SimpleApiComponent extends LightningElement {
         this.followers = "";
         this.location = "";
         this.twitch_url = "";
+
         const calloutURL = "https://api.chess.com/pub/player/" + this.chessName;
         fetch(calloutURL, { 
             method : "GET",
@@ -46,6 +49,25 @@ export default class SimpleApiComponent extends LightningElement {
             this.twitch_url = String(responseJSON.twitch_url);
         });
         this.chessName = "";
+    }
+
+    savePlayer(){
+        const playerInfo = {
+            avatarObj : this.avatar,
+            urlObj : this.url,
+            nameObj : this.namee,
+            usernameObj : this.username,
+            titleObj : this.title,
+            followersObj : this.followers,
+            locationObj : this.location,
+            turlObj : this.twitch_url
+        }
+        savePlayerApex({ payload: JSON.stringify(playerInfo)}).then( response =>{
+            console.log('Item inserted sucessfully' + response);
+            //this.fetchToDos();
+        }).catch( error => {
+            console.log('Error inserting item'+ error);
+        });
     }
 
     get getAvatar(){

@@ -1,5 +1,4 @@
 import { LightningElement , api} from 'lwc';
-import { setChessName } from 'c/simpleApiComponent';
 
 export default class TitledRankedList extends LightningElement {
 
