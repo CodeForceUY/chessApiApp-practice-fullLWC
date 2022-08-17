@@ -22,4 +22,8 @@
     <lightning-layout>
         <lightning-button variant="success" label="Save Player" title="Save Player" onclick={savePlayer}></lightning-button>
     </lightning-layout>
+    <lightning-layout>
+        <p><lightning-input type="text" label="Email" onchange={getEmail}></lightning-input></p>
+        <lightning-button variant="success" label="Send Mail" title="Send Mail" onclick={sendMail}></lightning-button>
+    </lightning-layout>
 </template>

@@ -1,9 +1,11 @@
 import { LightningElement , track } from 'lwc';
 import savePlayerApex from "@salesforce/apex/chessController.savePlayerApex";
+import sendEmailBackend from "@salesforce/apex/chessController.savePlayerApex";
 
 export default class SimpleApiComponent extends LightningElement {
 
     @track chessName;
+    @track email;
     @track avatar;
     @track url;
     @track namee;
@@ -50,7 +52,7 @@ export default class SimpleApiComponent extends LightningElement {
         });
         this.chessName = "";
     }
-
+    
     savePlayer(){
         const playerInfo = {
             avatarObj : this.avatar,
@@ -68,6 +70,29 @@ export default class SimpleApiComponent extends LightningElement {
         }).catch( error => {
             console.log('Error inserting item'+ error);
         });
+    }
+
+    sendMail(){
+        const playerInfo = {
+            avatarObj : this.avatar,
+            urlObj : this.url,
+            nameObj : this.namee,
+            usernameObj : this.username,
+            titleObj : this.title,
+            followersObj : this.followers,
+            locationObj : this.location,
+            turlObj : this.twitch_url
+        }
+        sendEmailBackend({ payload: JSON.stringify(playerInfo), email: this.email}).then( response =>{
+            console.log('Mail send sucessfully' + response);
+            //this.fetchToDos();
+        }).catch( error => {
+            console.log('Error inserting item'+ error);
+        });
+    }
+
+    getEmail(event){
+        this.email = event.target.value;
     }
 
     get getAvatar(){

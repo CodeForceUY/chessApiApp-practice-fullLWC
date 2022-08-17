@@ -20,6 +20,18 @@ public class chessController {
         return String.valueOf(playObj.Id);
     }
 
+    public static void sendEmailBackend(string payload, string email){
+        PlayerObject payloadObject = (PlayerObject) JSON.deserialize(payload, PlayerObject.class);
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddress = new String[]{email};
+        string subject = 'Informacion de ' + payloadObject.nameObj;
+        string cuerpo = 'Name: ' + payloadObject.nameObj + 'Nombre de Usuario: ' + payloadObject.usernameObj + 'Titulo Maestria: ' + payloadObject.titleObj + 'Twitch Url: ' + payloadObject.turlObj + 'Chess.com Url: ' + payloadObject.urlObj;
+        mail.setToAddresses(toAddress);
+        mail.setSubject(subject);
+        mail.setHtmlBody('<h1>'+ cuerpo + '</h1>');
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    }
+
     public class PlayerObject {
         @AuraEnabled
         public string avatarObj;
