@@ -21,15 +21,20 @@ public class chessController {
     }
 
     public static void sendEmailBackend(string payload, string email){
-        PlayerObject payloadObject = (PlayerObject) JSON.deserialize(payload, PlayerObject.class);
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        String[] toAddress = new String[]{email};
-        string subject = 'Informacion de ' + payloadObject.nameObj;
-        string cuerpo = 'Name: ' + payloadObject.nameObj + 'Nombre de Usuario: ' + payloadObject.usernameObj + 'Titulo Maestria: ' + payloadObject.titleObj + 'Twitch Url: ' + payloadObject.turlObj + 'Chess.com Url: ' + payloadObject.urlObj;
-        mail.setToAddresses(toAddress);
-        mail.setSubject(subject);
-        mail.setHtmlBody('<h1>'+ cuerpo + '</h1>');
-        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+        try{
+            PlayerObject payloadObject = (PlayerObject) JSON.deserialize(payload, PlayerObject.class);
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            mail.toAddresses = new String[] { email };
+            string subject = 'Informacion de ' + payloadObject.nameObj;
+            string cuerpo = 'Name: ' + payloadObject.nameObj + 'Nombre de Usuario: ' + payloadObject.usernameObj + 'Titulo Maestria: ' + payloadObject.titleObj + 'Twitch Url: ' + payloadObject.turlObj + 'Chess.com Url: ' + payloadObject.urlObj;
+            mail.optOutPolicy = 'FILTER';
+            mail.subject = subject;
+            mail.plainTextBody = cuerpo;
+            Messaging.SingleEmailMessage[] messages =   new List<Messaging.SingleEmailMessage> {mail};
+            Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
+        }catch(exception e){
+            system.debug('Error '+ e.getMessage());
+        }
     }
 
     public class PlayerObject {

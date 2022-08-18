@@ -72,6 +72,10 @@ export default class SimpleApiComponent extends LightningElement {
         });
     }
 
+    getEmail(event){
+        this.email = event.target.value;
+    }
+
     sendMail(){
         const playerInfo = {
             avatarObj : this.avatar,
@@ -84,15 +88,11 @@ export default class SimpleApiComponent extends LightningElement {
             turlObj : this.twitch_url
         }
         sendEmailBackend({ payload: JSON.stringify(playerInfo), email: this.email}).then( response =>{
-            console.log('Mail send sucessfully' + response);
+            console.log('Mail send sucessfully send to ' + this.email);
             //this.fetchToDos();
         }).catch( error => {
             console.log('Error inserting item'+ error);
         });
-    }
-
-    getEmail(event){
-        this.email = event.target.value;
     }
 
     get getAvatar(){
