@@ -1,19 +1,19 @@
-import { LightningElement , track } from 'lwc';
+import { LightningElement } from 'lwc';
 import savePlayerApex from "@salesforce/apex/chessController.savePlayerApex";
 import sendEmailBackend from "@salesforce/apex/chessController.savePlayerApex";
 
 export default class SimpleApiComponent extends LightningElement {
 
-    @track chessName;
-    @track email;
-    @track avatar;
-    @track url;
-    @track namee;
-    @track username;
-    @track title;
-    @track followers;
-    @track location;
-    @track twitch_url;
+    chessName;
+    email;
+    avatar;
+    url;
+    namee;
+    username;
+    title;
+    followers;
+    location;
+    twitch_url;
 
     getChessPlayer(event){
         this.chessName = event.target.value;

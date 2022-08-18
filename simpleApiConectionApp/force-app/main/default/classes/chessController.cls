@@ -24,11 +24,12 @@ public class chessController {
         try{
             PlayerObject payloadObject = (PlayerObject) JSON.deserialize(payload, PlayerObject.class);
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-            mail.toAddresses = new String[] { email };
+            String[] destinatarios = new String[]{email};
+            mail.toAddresses = destinatarios;
             string subject = 'Informacion de ' + payloadObject.nameObj;
             string cuerpo = 'Name: ' + payloadObject.nameObj + 'Nombre de Usuario: ' + payloadObject.usernameObj + 'Titulo Maestria: ' + payloadObject.titleObj + 'Twitch Url: ' + payloadObject.turlObj + 'Chess.com Url: ' + payloadObject.urlObj;
-            mail.optOutPolicy = 'FILTER';
             mail.subject = subject;
+            mail.setSenderDisplayName(param0);
             mail.plainTextBody = cuerpo;
             Messaging.SingleEmailMessage[] messages =   new List<Messaging.SingleEmailMessage> {mail};
             Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
